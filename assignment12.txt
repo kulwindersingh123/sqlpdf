@@ -1,0 +1,121 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+
+public class program
+{
+    public static void IsPositive(int Number) 
+    {
+        if (Number > 0)
+        {
+            Console.WriteLine("Number is positive.");
+        }
+        else if (Number < 0)
+        {
+            Console.WriteLine("Number is negative.");
+        }
+        else
+        {
+            Console.WriteLine("Number is zero.");
+        }
+    }
+    public static void IsLeapYear(int Year) 
+    {
+        
+        Console.WriteLine(Year % 4 == 0 ? "Entered year is a leap year" : "Not leap year");
+
+    }
+
+    public static void IsAlphabet(char Alphabet)
+    {
+
+
+        if (Alphabet >= 'a' && Alphabet <= 'z' || Alphabet >= 'A' && Alphabet <= 'Z')
+        {
+            Console.WriteLine("Character is alphabet.");
+        }
+        else
+        {
+            Console.WriteLine("Character is not a alphabet.");
+        }
+
+    }
+
+    public static int Maximum(int firstNumber, int secondNumber, int thirdNumber)
+{
+
+   
+        
+        if (firstNumber > secondNumber && firstNumber > thirdNumber) 
+        {
+            return firstNumber;
+        }
+        else if(secondNumber>firstNumber && secondNumber>thirdNumber)
+        {
+            return secondNumber;
+        }
+        else
+        {
+            return thirdNumber;
+        }
+        
+    
+}
+    public static void IsDivisible(int Number)
+    {
+        if (Number % 5 == 0 && Number % 11 == 0)
+        {
+            Console.WriteLine("The number is divisible by 5 and 11. ");
+        }
+        else
+        {
+            Console.WriteLine("The number is not divisible by 5 and 11. ");
+        }
+
+    }
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the option here:");
+        int option = Convert.ToInt32(Console.ReadLine());
+        switch (option) 
+        {
+            case 1:
+                Console.WriteLine("Ques.1");
+                program.IsPositive(-1);
+                break;
+           case 2:
+                Console.WriteLine("Ques.2");
+                Console.WriteLine("Enter the year here:");
+                int Year = Convert.ToInt32(Console.ReadLine());
+                program.IsLeapYear(Year);
+                break;
+           case 3:
+                Console.WriteLine("Ques.3");
+                char Alphabet;
+                Console.WriteLine("Enter the character here:");
+                Alphabet = Convert.ToChar(Console.ReadLine());
+                program.IsAlphabet(Alphabet);
+                break;
+           case 4:
+                Console.WriteLine("Ques.4");
+                int firstNumber = 45, secondNumber = 98, thirdNumber = 5;
+                program.Maximum(firstNumber, secondNumber, thirdNumber);
+                break;
+           case 5:
+                Console.WriteLine("Ques.5");
+                program.IsDivisible(10);
+                break;
+            //default: Console.WriteLine("enter valid option.");
+        }
+
+
+
+
+
+
+
+
+    }
+
+}
+
+
