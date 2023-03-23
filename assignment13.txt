@@ -1,0 +1,262 @@
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+
+public class program
+{
+    public static void MaxAndMinOfArray(int[] array) 
+    {
+        int letMaxIs = array[0];
+        int letMinIs = array[0];
+        letMaxIs = array[0];
+        letMinIs = array[0];
+        for (int itration1 = 1; itration1 < array.Length; itration1++)
+        {
+            if (array[itration1] > letMinIs)
+            {
+                letMaxIs = array[itration1];
+            }
+            if (array[itration1] < letMinIs)
+            {
+                letMinIs = array[itration1];
+            }
+        }
+        Console.Write("Maximum element = {0}", letMaxIs);
+  
+        Console.Write("Minimum element = {0}", letMinIs);
+
+
+    }
+
+    public static void InsertElementInArray(int[] inputArray)
+    {
+        Console.WriteLine("Enter the position at which element will insert:");
+        int positionAtwhichElementWillInsert = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter the item which you want to enter:");
+        int itemWhichWillInsteredInArray = Convert.ToInt32(Console.ReadLine()); 
+        int[] tempraryArray = new int[inputArray.Length + 1];
+        Console.WriteLine("Before insertion array is:");
+        for (int itration1 = 0; itration1 < inputArray.Length; itration1++)
+        {
+            Console.WriteLine(inputArray[itration1]);
+        }
+        for (int itration2 = 0; itration2 < inputArray.Length + 1; itration2++)
+        {
+            if (itration2 < positionAtwhichElementWillInsert - 1)
+                tempraryArray[itration2] = inputArray[itration2];
+            else if (itration2 == positionAtwhichElementWillInsert - 1)
+                tempraryArray[itration2] = itemWhichWillInsteredInArray;
+            else
+                tempraryArray[itration2] = inputArray[itration2 - 1];
+        }
+        Console.WriteLine("After insertion array is:");
+        for (int itration3 = 0; itration3 < tempraryArray.Length; itration3++)
+        {
+            Console.WriteLine(tempraryArray[itration3]);
+        }
+
+
+
+    }
+    public static void UniqueElementInArray(int[] array3)
+    {
+        Console.WriteLine("Unique elements in array are:");
+
+        for (int i = 0; i < array3.Length; i++)
+        {
+            int countOfOccurance = 0;
+            for (int j = 0; j < array3.Length; j++)
+            {
+                if (array3[i] == array3[j])
+                {
+                    countOfOccurance++;
+                }
+            }
+            if (countOfOccurance == 1)
+            {
+                Console.WriteLine(array3[i]);
+
+            }
+        }
+    }
+    public static void CopyElementOfArray(int[] array4)
+    {
+        int[] newArray = new int[array4.Length];
+        Console.WriteLine("Origianl array:");
+
+        for (int i = 0; i < array4.Length; i++)
+        {
+            Console.WriteLine(array4[i]);
+        }
+        for (int i = 0; i < array4.Length; i++)
+        {
+            newArray[i] = array4[i];
+        }
+        Console.WriteLine("Elements copied from origianl array in new array:");
+        for (int i = 0; i < newArray.Length; i++)
+        {
+            Console.WriteLine(newArray[i]);
+        }
+    }
+    public static void FrequencyOfEachElementInArray(int[] array4)
+    {
+        int[] newArray = new int[array4.Length];
+        int visited = -1;
+
+        for (int i = 0; i < array4.Length; i++)
+        {
+            int count = 1;
+            for (int j = i + 1; j < array4.Length; j++)
+            {
+                if (array4[i] == array4[j])
+                {
+                    count++;
+
+                    newArray[j] = visited;
+                }
+            }
+            if (newArray[i] != visited)
+                newArray[i] = count;
+        }
+
+        Console.WriteLine(" Element | Frequency");
+
+        for (int i = 0; i < newArray.Length; i++)
+        {
+            if (newArray[i] != visited)
+                Console.WriteLine("    " + array4[i] + "    |    " + newArray[i]);
+        }
+        Console.WriteLine("---------------------");
+    }
+    public static void SortArray(int[] array5) 
+    {
+        for (int i = 0; i < array5.Length - 1; i++)
+        {
+            for (int j = 0; j < array5.Length - 1; j++)
+            {
+                if (array5[j] > array5[j + 1])
+                {
+                    int t = array5[j];
+                    array5[j] = array5[j + 1];
+                    array5[j + 1] = t;
+
+                }
+            }
+
+        }
+        Console.WriteLine("sorted array:");
+        for (int i = 0; i < array5.Length; i++)
+        {
+            Console.WriteLine(array5[i]);
+        }
+    }
+    public static void DeleteSpecificElement(int[] array) 
+    {
+        List<int> list = array.ToList();
+        int itemToBeRemoved = 5;
+        list.RemoveAt(list.IndexOf(itemToBeRemoved));
+        Console.WriteLine(string.Join(",", list));
+
+    }
+    public static void DeleteDuplicateElements(int[] array8) 
+    {
+        List<int> list1 = array8.ToList();
+
+
+        List<int> distinct = list1.Distinct().ToList();
+
+        foreach (int value in distinct)
+        {
+            Console.WriteLine("After: {0}", value);
+        }
+    }
+    public static void OddAndEvenSeperationInArray(int[] array9) 
+    {
+        int[] arr2 = new int[array9.Length];
+        int[] arr3 = new int[array9.Length];
+        int j = 0, k = 0;
+        for (int i = 0; i < array9.Length; i++)
+        {
+            if (array9[i] % 2 == 0)
+            {
+                arr2[j] = array9[i];
+                j++;
+            }
+            else
+            {
+                arr3[k] = array9[i];
+                k++;
+            }
+        }
+        Console.Write("\nThe Even elements are : \n");
+        for (int i = 0; i < j; i++)
+        {
+            Console.Write("{0} ", arr2[i]);
+        }
+
+        Console.Write("\nThe Odd elements are :\n");
+        for (int i = 0; i < k; i++)
+        {
+            Console.Write("{0} ", arr3[i]);
+        }
+        Console.Write("\n\n");
+    
+}
+    public static void PrintArray(int[] array12, int size)
+    {
+        for (int itration = 0; itration < size; itration++) 
+        {
+            array12[itration]= Convert.ToInt32(Console.ReadLine());
+        }
+
+    }
+    public static void Main(String[] args) 
+    {
+        Console.WriteLine("Enter the size of array:");
+        int size=Convert.ToInt32(Console.ReadLine());
+        int[] array = new int[size];
+        program.PrintArray(array,size);
+        Console.WriteLine("Enter the number of question:");
+        int question = Convert.ToInt32(Console.ReadLine());
+        switch(question)
+        {
+            case 1:
+                program.MaxAndMinOfArray(array);
+                break;
+            case 2:
+                program.InsertElementInArray(array);
+                break;
+             case 3:
+                
+                program.UniqueElementInArray(array);
+                break;
+             case 4:
+                program.CopyElementOfArray(array);
+                break;
+             case 5:
+                int[] array4 = new int[] { 1, 2, 3, 3, 3, 2, 1, 4, 5, 9 };
+                program.FrequencyOfEachElementInArray(array4);
+                break;
+             case 6:
+                int[] array5 = new int[] { 2,3,1,3,1,56,3,2,1,5,9,54,0};
+                program.SortArray(array5);
+                break;
+            case 7:
+                int[] array6 = new int[] { 1,2,3,4,5};
+                program.DeleteSpecificElement(array6);     
+                    break;
+            case 8:
+                int[] array8 = new int[] { 1,2,2,3,4,4,5,4,3,2,23,};
+                program.DeleteDuplicateElements(array8);
+                break;
+            case 9:
+                int[] array9 = new int[] { 1,2,3,4,5,6,7,8,9,10};
+                program.OddAndEvenSeperationInArray(array9);
+                break;
+        }
+    }
+}
+
+
