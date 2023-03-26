@@ -1,0 +1,157 @@
+resuusing System.Collections.Generic;
+using System.Diagnostics;
+using System.Text;
+
+public class Program
+{
+
+    public static void IsStringPalindrom(string string1)
+    {
+        string reversedString = "";
+        for (int index = string1.Length - 1; index >= 0; index--)
+        {
+
+            reversedString = reversedString + string1[index];
+
+        }
+        if (reversedString.ToLower().Equals(string1.ToLower()))
+        {
+            Console.WriteLine("The string you have entered is palindrom string.");
+        }
+        else
+        {
+            Console.WriteLine("The string you have entered is not a palindrom string.");
+        }
+
+    }
+    public static void MaxFrequecncyOfString(string string2) 
+    {
+        int[] frequencyArray = new int[string2.Length];
+        char[] charArrayOfString = string2.ToCharArray();
+        int max = frequencyArray[0];
+        char maximumOccuredCharacter = ' ';
+
+        for (int outerindex = 0; outerindex < charArrayOfString.Length; outerindex++)
+        {
+            frequencyArray[outerindex] = 1;
+            for (int innerindex = outerindex + 1; innerindex < charArrayOfString.Length; innerindex++)
+            {
+                if (charArrayOfString[outerindex] == charArrayOfString[innerindex])
+                {
+                    frequencyArray[outerindex]++;
+                    charArrayOfString[innerindex] = '0';
+                }
+            }
+        }
+        for (int i = 0; i < frequencyArray.Length; i++)
+        {
+           
+            if (max < frequencyArray[i])
+            {
+                max = frequencyArray[i];
+                maximumOccuredCharacter = charArrayOfString[i];
+
+            }
+        }
+      
+        Console.WriteLine(maximumOccuredCharacter + " has maximum frequency of " + max + " .");
+    }
+    public static void OccurenceOfDigit(int inputnumber)
+    {
+        string string3=inputnumber.ToString();
+        int[] frequencyArray= new int[string3.Length];
+        char[] charArrayOfString = string3.ToCharArray();
+        for (int index=0;index< charArrayOfString.Length;index++) 
+        {
+            frequencyArray[index] = 1;
+            for (int innerindex=index+1;innerindex< charArrayOfString.Length;innerindex++) 
+            {
+                if (charArrayOfString[index] == charArrayOfString[innerindex]) 
+                {
+                    frequencyArray[index]++;
+                    charArrayOfString[innerindex] = '0';
+                }
+            }
+        }
+        for (int index=0; index < frequencyArray.Length;index++) 
+        {
+            if (charArrayOfString[index] != '0' && charArrayOfString[index] != ' ')
+            {
+                Console.WriteLine("Digit " + charArrayOfString[index] + " comes " + frequencyArray[index] + " times.");
+            }
+           
+        }
+    }
+    public static void  ReverseBycapitalizing() 
+    {
+        Console.WriteLine("Enter the string for operation:");
+        string inputFromUser = Console.ReadLine();
+        string[] stringArray = inputFromUser.Split(" ");
+        string result = "";
+        for (int index =0;index<stringArray.Length;index++) 
+        {
+            String s = stringArray[index];
+            char first_letter = s[0];
+            if (first_letter>=97 && first_letter<=122) 
+            {
+                first_letter = (char)(first_letter - 32);
+
+            }
+            result = result + first_letter + s.Substring(1, s.Length - 1) + " ";
+        }
+        for (int index = result.Length-1;index>=0;index--) 
+        {
+            Console.Write(result[index]);
+        }
+    }
+    public static void StringBufferCapitalizing() 
+    {
+        Console.WriteLine("Enter a string for operation:");
+        string userInputString=Console.ReadLine();
+        StringBuilder stringBuilderForOperation=new StringBuilder(userInputString);
+        
+    }
+    public static void InputString(string str)
+    {
+        Console.WriteLine("Please enter a string for operations:");
+        string origianlString=Console.ReadLine();
+
+    }
+    
+
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the question number here :");
+        int question = Convert.ToInt32(Console.ReadLine());
+        //string str;
+        //Program.InputString(str);
+        switch(question)
+        {
+             case 1:
+                Console.WriteLine("Enter the String which you want to check its Palindrom or not:");
+                string userInput = Console.ReadLine();
+                Program.IsStringPalindrom(userInput);
+                break;
+            case 2:
+                Console.WriteLine("Enter the number to find maximum occured character:");
+                string userInput1 = Console.ReadLine();
+                Program.MaxFrequecncyOfString(userInput1);
+                break;
+
+            case 3:
+                Console.WriteLine("Enter the number to find occurence of digits:");
+                int userInput2 = Convert.ToInt32(Console.ReadLine());
+                Program.OccurenceOfDigit(userInput2);
+                break;
+            case 4:
+               Program.ReverseBycapitalizing();
+                break;
+            case 5:
+                Program.StringBufferCapitalizing();
+                break;
+
+
+
+        }
+    }
+}
