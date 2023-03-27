@@ -1,0 +1,111 @@
+ abstract class Shape
+{
+    protected string shapeName;
+
+    public abstract double area();
+
+    public override string ToString()
+    {
+        return shapeName;
+    }
+}
+
+//shape class being extended by sphere class
+class Sphere : Shape
+{
+    private double radius;
+
+    public Sphere(double radius)
+    {
+        shapeName = "Sphere";
+        this.radius = radius; //this keyword for current instance
+    }
+
+    public override double area()
+    {
+        //caluclating area of sphere
+        return 4 * Math.PI * radius * radius;
+    }
+}
+
+//shape class being extended by rectangle class
+class Rectangle : Shape
+{
+    private double length;
+    private double width;
+
+    public Rectangle(double length, double width)
+    {
+        shapeName = "Rectangle";
+        this.length = length; //this keyword for current instance
+        this.width = width; //this keyword for current instance
+    }
+
+    public override double area()
+    { // calculating and returning area of rectangle
+        return length * width;
+    }
+}
+
+//shape class being extended by cylinder class
+class Cylinder : Shape
+{
+    private double radius;
+    private double height;
+
+    public Cylinder(double radius, double height)
+    {
+        shapeName = "Cylinder";
+        this.radius = radius; //this keyword for current instance
+        this.height = height; //this keyword for current instance
+    }
+
+    public override double area()
+    {
+        //calculating and returning area of cylinder
+        return Math.PI * radius * radius * height;
+    }
+}
+
+class Paint
+{
+    private double coverage;
+
+    // method named paint to input coverage
+    public Paint(double coverage)
+    {
+        this.coverage = coverage;
+    }
+
+    // method named amount to calculate paintaing amount
+    public double amount(Shape shape)
+    {
+        double paintNeeded = shape.area() / coverage;
+        Console.WriteLine("Paint needed for {0}: {1:F2} gallons", shape, paintNeeded);
+        return paintNeeded;
+    }
+}
+
+
+
+
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        
+
+        Paint paint = new Paint(10); // 10 square feet per gallon coverage
+
+        Rectangle deck = new Rectangle(20, 35);
+        Sphere bigBall = new Sphere(15);
+        Cylinder tank = new Cylinder(10, 30);
+
+        double amountDeck = paint.amount(deck);
+        double amountBigBall = paint.amount(bigBall);
+        double amountTank = paint.amount(tank);
+
+    }
+
+}
