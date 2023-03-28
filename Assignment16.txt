@@ -1,0 +1,355 @@
+//Ques4
+/*using System;
+using System.Collections.Generic;
+
+namespace StudentInformation
+{
+    struct Student
+    {
+        public int Id;
+        public string Name;
+        public string CourseName;
+        public DateTime DateOfBirth;
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Student> students = new List<Student>();
+
+            while (true)
+            {
+                Console.WriteLine("Enter student information or type 'exit' to quit:");
+                Console.Write("Student Id: ");
+                string input = Console.ReadLine();
+                if (input == "exit") break;
+                int id = int.Parse(input);
+
+                Console.Write("Student Name: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Course Name: ");
+                string courseName = Console.ReadLine();
+
+                Console.Write("Date of Birth (yyyy-mm-dd): ");
+                DateTime dateOfBirth = DateTime.Parse(Console.ReadLine());
+
+                Student student = new Student { Id = id, Name = name, CourseName = courseName, DateOfBirth = dateOfBirth };
+                students.Add(student);
+            }
+
+            Console.WriteLine("All Students Information:");
+            foreach (Student student in students)
+            {
+                Console.WriteLine($"Id: {student.Id}, Name: {student.Name}, Course Name: {student.CourseName}, Date of Birth: {student.DateOfBirth.ToShortDateString()}");
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+*/
+
+
+//Ques 6
+/*using System;
+using System.Collections.Generic;
+
+namespace DeveloperInformation
+{
+    struct Developer
+    {
+        public int Id;
+        public string Name;
+        public double Salary;
+        public Dictionary<string, int> Skills;
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Developer> developers = new List<Developer>();
+
+            // define skills dictionary
+            Dictionary<string, int> skills = new Dictionary<string, int>()
+            {
+                { "C#", 101 },
+                { ".Net", 201 },
+                { "Java", 301 },
+                { "Python", 401 }
+            };
+
+            while (true)
+            {
+                Console.WriteLine("Enter developer information or type 'exit' to quit:");
+                Console.Write("Developer Id: ");
+                string input = Console.ReadLine();
+                if (input == "exit") break;
+                int id = int.Parse(input);
+
+                Console.Write("Developer Name: ");
+                string name = Console.ReadLine();
+
+                Console.Write("Salary: ");
+                double salary = double.Parse(Console.ReadLine());
+
+                Dictionary<string, int> devSkills = new Dictionary<string, int>();
+                while (true)
+                {
+                    Console.Write("Skill (or type 'done'): ");
+                    string skillName = Console.ReadLine();
+                    if (skillName == "done") break;
+
+                    if (skills.ContainsKey(skillName))
+                    {
+                        int code = skills[skillName];
+                        devSkills.Add(skillName, code);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Skill '{skillName}' not found.");
+                    }
+                }
+
+                Developer developer = new Developer { Id = id, Name = name, Salary = salary, Skills = devSkills };
+                developers.Add(developer);
+            }
+
+            Console.WriteLine("All Developers Information:");
+            foreach (Developer developer in developers)
+            {
+                Console.Write($"Id: {developer.Id}, Name: {developer.Name}, Salary: {developer.Salary}, Skills: ");
+                foreach (KeyValuePair<string, int> skill in developer.Skills)
+                {
+                    Console.Write($"({skill.Key}: {skill.Value}) ");
+                }
+                Console.WriteLine();
+            }
+
+            Console.ReadLine();
+        }
+    }
+}
+*/
+//Ques 2
+/*interface IA
+{
+    void Display();
+    void Populate();
+}
+interface IB
+{
+    void Display();
+    void Fetch();
+}
+class Base
+{
+    public Base() { }
+
+    public void Display()
+    {
+        Console.WriteLine("Base Display");
+    }
+}
+class Derived : Base, IA, IB
+{
+
+    void IA.Display()
+    {
+        Console.WriteLine("IA Display");
+    }
+
+    void IB.Display()
+    {
+        Console.WriteLine("IB Display");
+    }
+
+    void IA.Populate()
+    {
+        Console.WriteLine("IA Populate");
+    }
+
+    void IB.Fetch()
+    {
+        Console.WriteLine("IB Fetch");
+    } 
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        Derived d = new Derived();
+        d.Display(); // outputs "Derived Display"
+        ((IA)d).Populate(); // outputs "IA Populate"
+        ((IB)d).Display(); // outputs "IB Display"
+        ((IB)d).Fetch(); // outputs "IB Fetch"
+    }
+}
+*/
+//Ques5
+/*using System;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;*/
+
+/*class Program
+{
+    static void Main(string[] args)
+    {
+        Dictionary<int, Dictionary<string, string>> students = new Dictionary<int, Dictionary<string, string>>();
+
+        while (true)
+        {
+            Console.Write("Enter student ID (0 to exit): ");
+            int id = int.Parse(Console.ReadLine());
+
+            if (id == 0)
+            {
+                break;
+            }
+
+            Console.Write("Enter student name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Enter course name: ");
+            string course = Console.ReadLine();
+
+            Console.Write("Enter date of birth (dd/mm/yyyy): ");
+            string dob = Console.ReadLine();
+
+            Dictionary<string, string> studentInfo = new Dictionary<string, string>();
+            studentInfo.Add("Name", name);
+            studentInfo.Add("Course", course);
+            studentInfo.Add("DOB", dob);
+
+            students.Add(id, studentInfo);
+        }
+
+        Console.WriteLine("\nStudent information:");
+        foreach (KeyValuePair<int, Dictionary<string, string>> student in students)
+        {
+            Console.WriteLine("ID: " + student.Key);
+            Console.WriteLine("Name: " + student.Value["Name"]);
+            Console.WriteLine("Course: " + student.Value["Course"]);
+            Console.WriteLine("DOB: " + student.Value["DOB"]);
+            Console.WriteLine();
+        }
+    }
+}
+*/
+class Program
+{
+    static void Main(string[] args)
+    {
+        Dictionary<int, Dictionary<string, string>> students = new Dictionary<int, Dictionary<string, string>>();
+
+        while (true)
+        {
+            Console.Write("Enter student ID (0 to exit): ");
+            int id = int.Parse(Console.ReadLine());
+
+            if (id == 0)
+            {
+                break;
+            }
+
+            Console.Write("Enter student name: ");
+            string name = Console.ReadLine();
+
+            Console.Write("Enter course name: ");
+            string course = Console.ReadLine();
+
+            Console.Write("Enter date of birth (dd/mm/yyyy): ");
+            string dob = Console.ReadLine();
+
+            Dictionary<string, string> studentInfo = new Dictionary<string, string>();
+            studentInfo.Add("Name", name);
+            studentInfo.Add("Course", course);
+            studentInfo.Add("DOB", dob);
+
+            students.Add(id, studentInfo);
+        }
+
+        Console.WriteLine("\nStudent information:");
+        foreach (KeyValuePair<int, Dictionary<string, string>> student in students)
+        {
+            Console.WriteLine("ID: " + student.Key);
+            Console.WriteLine("Name: " + student.Value["Name"]);
+            Console.WriteLine("Course: " + student.Value["Course"]);
+            Console.WriteLine("DOB: " + student.Value["DOB"]);
+            Console.WriteLine();
+        }
+    }
+}
+/*public partial class AreaOfSquare
+{
+    private float lengthOfSquare;
+    private float breadthOfSquare;
+    public void GettingEdges(float length, float breadth)
+    {
+        this.lengthOfSquare = length;
+        this.breadthOfSquare = breadth;
+    }
+}
+public partial public AreaOfSquare
+{
+}
+public partial class Geeks
+{
+    private string Author_name;
+    private int Total_articles;
+
+    public Geeks(string a, int t)
+    {
+        this.Author_name = a;
+        this.Total_articles = t;
+    }
+}
+public partial class Geeks
+{
+    public void Display()
+    {
+        Console.WriteLine("Author's name is : " + Author_name);
+        Console.WriteLine("Total number articles is : " + Total_articles);
+    }
+}*/
+
+
+
+/*public partial class MyClass
+{
+    partial void PartialMethod();
+
+    public void Method1()
+    {
+        Console.WriteLine("Method1");
+        PartialMethod();
+    }
+}
+
+
+public partial class MyClass
+{
+    partial void PartialMethod()
+    {
+        Console.WriteLine("PartialMethod");
+    }
+
+    public void Method2()
+    {
+        Console.WriteLine("Method2");
+    }
+}
+
+// File Program.cs
+class Program
+{
+    static void Main(string[] args)
+    {
+        MyClass myClass = new MyClass();
+        myClass.Method1(); // Output: Method1, PartialMethod
+        myClass.Method2(); // Output: Method2
+    }
+}
+*/
