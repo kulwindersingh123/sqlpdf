@@ -1,0 +1,64 @@
+public class Program 
+{
+    public static void HandlingException() 
+    {
+        Console.WriteLine("Enter any number:");
+        String number=Console.ReadLine();
+        if (int.TryParse(number, out int userInput))
+        {
+            try
+            {
+                float resultOfDivision = userInput / 0;
+                Console.WriteLine("The result is:{0}", resultOfDivision);
+            }
+            catch (DivideByZeroException ex) 
+            {
+                Console.WriteLine("Exception occured while doing operation."+ex);
+            }
+            Console.WriteLine("Rest of code will work");
+        }
+        else 
+        {
+            Console.WriteLine("Please enter integer for operation!");
+        }
+    }
+    public static int RethrowException() 
+    {
+        Console.WriteLine("Enter any number for exception handling");
+        string userInput=Console.ReadLine();
+        if (int.TryParse(userInput,out int number )) 
+        {
+        }
+            // Divide two numbers and throw an exception if the divisor is zero
+            if (number2 == 0)
+            {
+                throw new ArithmeticException("Division by zero");
+            }
+            return number / number2;
+        
+
+    }
+    public static void Main(string[] args) 
+    {
+        Console.WriteLine("Enter question number:");
+        string input=Console.ReadLine();
+        if (int.TryParse(input,out int QuestionNumber)) 
+        {
+            switch (QuestionNumber) 
+            {
+                case 1:
+                    Program.HandlingException();
+                    break;
+                case 2:
+                    Program.RethrowException();
+                    break;
+
+            }
+        }
+        else
+        {
+            Console.WriteLine("Please enter integer for solution!");
+        }
+
+    }
+}
