@@ -1,0 +1,32 @@
+Create procedure Creating_Developers_information1
+As
+Begin
+create table Developer_information1(Developer_ID varchar(20),Developer_Name varchar(20),Skills varchar(20));
+End;
+Create procedure Inserting_Developers_Data1
+As
+Begin 
+insert into Developer_information1 values
+('1219','Kulwinder singh','.NET')
+,('1212','Davinder singh','.NET')
+,('1213','Jashan singh','Java')
+,('1214','Karanveer singh','C#')
+,('1215','Haraman singh','React.js')
+,('1217','Harpreet singh','Flutter')
+,('1211','Gurjinder singh','Angular.js');
+End;
+Create Procedure Updating_Developers_Data1
+As
+Begin
+update Developer_information1 set Developer_Name='Harsh Dhiman' where Developer_ID='1214';
+End;
+Create Procedure Delete_table_rows1
+As
+Begin
+Delete from Developer_information1 where Developer_Name='Jashan singh';
+End;
+create procedure Reading_Developers_table1
+As
+Begin
+Select Developer_ID,Developer_Name,Skills from Developer_information1
+End;

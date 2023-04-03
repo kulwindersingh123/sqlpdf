@@ -1,0 +1,102 @@
+
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Reflection;
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        /*string connectionString = ConfigurationManager.ConnectionStrings["ConneectionForAssignment"].ConnectionString;
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            using (SqlCommand createTable = new SqlCommand("exec Create_Developer_information2;", connection))
+            {
+                createTable.CommandType= CommandType.StoredProcedure;
+                
+                    SqlDataReader ReaderForTable = createTable.ExecuteReader();
+
+                    if (ReaderForTable.HasRows)
+                    {
+                        while (ReaderForTable.Read())
+                        {
+
+                            Console.WriteLine("{0}\t{1}\t{2}", ReaderForTable["Developer_ID"], ReaderForTable["Developer_Name"], ReaderForTable["Skills"]);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unable to find data in gievn table!");
+                    }
+                    ReaderForTable.Close();
+
+                
+
+                using (SqlCommand insertingData = new SqlCommand("exec Insert_Data3", connection)) 
+                {
+                    insertingData.CommandType= CommandType.StoredProcedure;
+                    insertingData.ExecuteNonQuery();
+                    Console.WriteLine("Rows effected in table:" + insertingData.ExecuteNonQuery().ToString());
+
+                }
+                using (SqlCommand updateRows=new SqlCommand("exec Update_Data2", connection)) 
+                {
+                    updateRows.CommandType = CommandType.StoredProcedure;
+                    updateRows.ExecuteNonQuery();
+                    Console.WriteLine("Rows effected in table:" + updateRows.ExecuteNonQuery().ToString());
+
+                }
+                using (SqlCommand DeleteRows=new SqlCommand("exec Delete_row2", connection)) 
+                {
+                    DeleteRows.CommandType= CommandType.StoredProcedure;
+                    DeleteRows.ExecuteNonQuery();
+                    Console.WriteLine("Rows effected in table:" + DeleteRows.ExecuteNonQuery().ToString());
+                }
+
+            }
+        }
+*/
+        try
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["ConneectionForAssignment"].ConnectionString;
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            SqlCommand createTable = new SqlCommand("exec Creating_Developers_information1;", connection);
+            createTable.ExecuteNonQuery();
+            Console.WriteLine("Table created successfully!");
+            SqlCommand insertingData = new SqlCommand("exec Inserting_Developers_Data1", connection);
+            insertingData.ExecuteNonQuery();
+            Console.WriteLine("Rows effected while inserting data:" + insertingData.ExecuteNonQuery().ToString());
+            SqlCommand readTable = new SqlCommand("exec Reading_Developers_table1", connection);
+            SqlDataReader ReaderForTable = readTable.ExecuteReader();
+            Console.WriteLine("Here are rows belongs to created tables:");
+            if (ReaderForTable.HasRows)
+            {
+                while (ReaderForTable.Read())
+                {
+
+                    Console.WriteLine("{0}\t{1}\t{2}", ReaderForTable["Developer_ID"], ReaderForTable["Developer_Name"], ReaderForTable["Skills"]);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Unable to find data in gievn table!");
+            }
+            ReaderForTable.Close();
+            SqlCommand updateTable = new SqlCommand("exec Updating_Developers_Data1", connection);
+            updateTable.ExecuteNonQuery();
+            Console.WriteLine("Rows effected while updating rows:" + updateTable.ExecuteNonQuery().ToString());
+            SqlCommand DeleteData = new SqlCommand("exec Delete_table_rows1", connection);
+            DeleteData.ExecuteNonQuery();
+            Console.WriteLine("Rows effected while deleting rows:" + DeleteData.ExecuteNonQuery().ToString());
+            connection.Close();
+        }
+        catch (SystemException e) 
+        {
+            Console.WriteLine("Exception occured:"+e.Message);
+        }
+
+    }
+}

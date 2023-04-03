@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<connectionStrings>
+		<add name="ConneectionForAssignment" connectionString="Data Source=LAPTOP-HOHQ552T\SQLEXPRESS;Initial Catalog=Kulwinder_Singh;Integrated Security=True"  providerName="System.Data.SqlClient"></add>
+	</connectionStrings>
+</configuration>
