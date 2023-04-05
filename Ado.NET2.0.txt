@@ -1,0 +1,138 @@
+using System.Data.SqlClient;
+using System.Data;
+
+class Program
+{
+    private static DataRow[] dataset;
+
+    public static void Main(String[] args)
+    {
+        try
+        {
+            Console.WriteLine("Enter the operation which you want to perform on table:");
+            string operation = Console.ReadLine();
+            if (string.IsNullOrEmpty(operation))
+            {
+                Console.WriteLine("String is empty!");
+            }
+            else
+            {
+                string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["ConnectionForAssignment"].ConnectionString;
+                SqlConnection connection = new SqlConnection(connectionString);
+                connection.Open(); //Connection opened
+                SqlDataAdapter dataAdapter = new SqlDataAdapter("Select * from Employee_information", connection);
+
+                DataSet dataSet = new DataSet();
+                dataAdapter.Fill(dataSet);
+
+                DataTable dataTable = new DataTable();
+
+                dataAdapter.Fill(dataTable);
+
+                switch (operation)
+                {
+                    case "Insert":
+                        Console.WriteLine("Enter Employee ID");
+                        int.TryParse(Console.ReadLine(), out int employeeID);
+
+                        Console.WriteLine("Enter Employee Name:");
+                        string nameOfEmployee = Console.ReadLine();
+                        if (string.IsNullOrEmpty(nameOfEmployee))
+                        {
+                            Console.WriteLine("String is empty");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Enter Salry of employee:");
+                            int.TryParse(Console.ReadLine(), out int salary);
+
+                            Console.WriteLine("Enter the type of Employee:");
+                            string employeeType = Console.ReadLine();
+                            if (string.IsNullOrEmpty(employeeType))
+                            {
+                                Console.WriteLine("String is empty!");
+                            }
+                            else
+                            {
+
+                                DataRow insertNewRewInTable = dataTable.NewRow();
+                                insertNewRewInTable["Employee_Id"] = employeeID;
+                                insertNewRewInTable["Employee_Name"] = nameOfEmployee;
+                                insertNewRewInTable["Salary"] = salary;
+                                insertNewRewInTable["Employee_Type"] = employeeType;
+                                dataTable.Rows.Add(insertNewRewInTable);
+                                Console.WriteLine("Given details inserted successfully!");
+                            }
+
+                        }
+
+                        break;
+                    case "Read":
+                        Console.WriteLine("There are rows given below from given tabele after insertion:");
+                        foreach (DataRow row in dataTable.Rows)
+
+                        {
+
+                            Console.WriteLine(row[0] + " | " + row[1] + " | " + row[2] + " | " + row[3]);
+                        }
+
+                        break;
+                    case "Update":
+                        Console.WriteLine("Enter the ID of developer which you want to update: ");
+                        int.TryParse(Console.ReadLine(), out int employeeId);
+
+                        Console.WriteLine("Enter the Employee name which you want to replace with origianal name: ");
+                        string employeeName = Console.ReadLine();
+                        if (string.IsNullOrEmpty(employeeName))
+                        {
+
+                            Console.WriteLine("String is empty.");
+                        }
+                        else
+                        {
+                            dataAdapter.UpdateCommand = new SqlCommand($"update Employee_information set Employee_Name='{employeeName}' where Employee_Id={employeeId} ", connection);
+                            dataAdapter.UpdateCommand.ExecuteNonQuery();
+                            Console.WriteLine("Table updated successfully");
+                            dataAdapter.Update(dataSet);
+                        }
+
+                        break;
+                    case "Delete":
+                        Console.WriteLine("Enter the name of employee which you want to delete:");
+
+                        string employeeNameForDeleteOperation = Console.ReadLine();
+                        if (string.IsNullOrEmpty(employeeNameForDeleteOperation))
+                        {
+                            Console.WriteLine("String is empty.");
+
+                        }
+                        else
+                        {
+
+                            dataAdapter.DeleteCommand = new SqlCommand($"delete from Employee_information where Employee_Name='{employeeNameForDeleteOperation}'", connection);
+                            dataAdapter.DeleteCommand.ExecuteNonQuery();
+                            //dataAdapter.Update(dataset);
+                            Console.WriteLine("Row deleted successfully!");
+
+
+                        }
+
+                        break;
+                        connection.Close();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+
+
+    }
+}
+        
+        
+
+
+
+           
