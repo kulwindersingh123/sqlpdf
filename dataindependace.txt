@@ -1,0 +1,247 @@
+using DataAcsessLayer;
+using Microsoft.Extensions.DependencyInjection;
+using System.Security.Authentication.ExtendedProtection;
+using Microsoft.EntityFrameworkCore;
+using Models;
+
+public class Program
+{
+    public static int userChoiceForOperation()
+    {
+        Console.WriteLine("Enter 'c' to create a new row in table.\nEnter 'r' to read rows in table.\nEnter 'u' to update rows in table.\nEnter 'd' to delelte rows in table.");
+        //Console.WriteLine("Press 0 to return to menu.");
+        char.TryParse(Console.ReadLine(), out char userInputForOPerationOnSkillTable);
+        return userInputForOPerationOnSkillTable;
+    }
+
+    public static void Main(string[] args)
+    {
+
+        var services = new ServiceCollection();
+
+        services.AddDbContext<CompanyContext>(options =>
+        options.UseSqlServer(@"Server=LAPTOP-HOHQ552T\SQLEXPRESS;Database=MVCDatabase;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False"));
+        services.AddScoped<DepartmentRepository>();
+        var DepartmentOperations = services.BuildServiceProvider();
+
+        services.AddScoped<EmployeeRepository>();
+        var EmployeeOperations = services.BuildServiceProvider();
+
+        services.AddScoped<SkillRepository>();
+        var SkillOperations = services.BuildServiceProvider();
+
+        var myService = DepartmentOperations.GetRequiredService<DepartmentRepository>();
+        Console.WriteLine("Enter the Table in which you want to perform CRUD operations:");
+        Console.WriteLine("Enter 1 for Department.\nEnter 2 for Employee.\nEnter 3 for Skills and\n Enter 4 for EmployeeSkill.");
+        int.TryParse(Console.ReadLine(), out int userOptionToSelectTable);
+        switch (userOptionToSelectTable)
+        {
+            case 1:
+                Console.WriteLine("Enter count:");
+                int.TryParse(Console.ReadLine(), out int userInputForOPerationOnGivenTable);
+                switch (userInputForOPerationOnGivenTable)
+                {
+                case 1:
+
+                Console.WriteLine("Enter the Departement id:");
+                int.TryParse(Console.ReadLine(), out int idOfDepartment);
+                Department list = myService.ReadSpecificRowOfDepartment(idOfDepartment);
+                if (list == null)
+                {
+                    Console.WriteLine("There is not record corrosponding to this Id!");
+                }
+                else
+                {
+                    Console.WriteLine(list.Id + " | " + list.Name + " | " + list.IsActive);
+                }
+
+                break;
+                }
+
+
+                break;
+        
+        }
+    
+
+
+
+    }
+
+}
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+using Microsoft.EntityFrameworkCore;
+using Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAcsessLayer
+{
+    public class CompanyContext:DbContext
+    {
+        public CompanyContext(DbContextOptions<CompanyContext> options)
+        : base(options)
+        {
+        }
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
+        {
+            options.UseSqlServer(@"Server=LAPTOP-HOHQ552T\SQLEXPRESS;Database=MVCDatabase;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False");
+        }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeSkill> EmployeeSkills { get; set; }
+        public DbSet<Skill> Skills { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+           
+        }
+
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------
+
+
+
+using DataAcsessLayer.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
+using Models;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static DataAcsessLayer.Interfaces.ICRUD_Operations;
+
+namespace DataAcsessLayer
+{
+    
+    public class DepartmentRepository:IDepartment_CRUD_Operations
+    {
+        private readonly CompanyContext _CompanyContext;
+
+        public DepartmentRepository(CompanyContext dbContext)
+        {
+            _CompanyContext = dbContext;
+        }
+
+        
+
+
+        public bool insertDepartment(string nameOfDepartment,string IsDepartementActive)
+        {
+            var insertDepartment = new Department()
+            {
+
+                Name = nameOfDepartment,
+                IsActive = IsDepartementActive,
+            };
+
+            try
+            {
+                _CompanyContext.Departments.Add(insertDepartment);
+                _CompanyContext.SaveChanges();
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            List<Department> departments = _CompanyContext.Departments.ToList();
+            return true;
+
+        }
+
+
+        public Department ReadSpecificRowOfDepartment(int id)
+        {
+            Department department = _CompanyContext.Departments.Find(id);
+            return department;
+        }
+
+        public List<Department> ReadAllRowsOfDepartmentTable() 
+        {
+            List<Department> departments = _CompanyContext.Departments.ToList();
+            return departments;
+        }
+
+        public bool UpdateDepartmentTable(int id,string name, string IsActive ) 
+        {
+            Department department=_CompanyContext.Departments.Find( id);
+            if (department==null) 
+            {
+                return false;
+            }
+            department.Name = name;
+            department.IsActive = IsActive;
+            try
+            {
+                _CompanyContext.SaveChanges();
+            }
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.ToString());
+            }
+            return true;
+        }
+        public bool DeleteDepartmentTable(int id) 
+        {
+            
+            Department department = _CompanyContext.Departments.Find(id);
+            if (department == null)
+            {
+                return false;
+            }
+            else
+            {
+                _CompanyContext.Departments.Remove(department);
+                try
+                {
+                    _CompanyContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                return true;
+            }
+
+
+        }
+        public bool DeleteSpecificRow(int id) 
+        {
+            Department departmentThatWillDeleted = _CompanyContext.Departments.Find(id);
+            if (departmentThatWillDeleted == null)
+            {
+                return false;
+            }
+            else
+            {
+                _CompanyContext.Departments.Remove(departmentThatWillDeleted);
+                try
+                {
+                    _CompanyContext.SaveChanges();
+                }
+                catch(Exception ex) 
+                {
+                    Console.WriteLine(ex.ToString());
+                }
+                return true;
+            }
+
+        }
+    }
+    
+}
