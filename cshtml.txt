@@ -1,0 +1,1005 @@
+@model Department
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+
+        .container {
+            padding: 50px;
+            background-color: lightblue;
+        }
+
+        input[type=text], input[type=password], textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+            input[type=text]:focus, input[type=password]:focus {
+                background-color: orange;
+                outline: none;
+            }
+
+        div {
+            padding: 10px 0;
+        }
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        .addbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+            .addbtn:hover {
+                opacity: 1;
+            }
+    </style>
+</head>
+<body>
+    <form asp-controller="Department" asp-action="Create" method="post">
+        <div class="container">
+            <center>  <h1>Add Department</h1> </center>
+            <hr>
+            <label><b>Name:</b></label>
+            <input type="text" name="Name" placeholder="Enter Department Name" size="30" required />
+            <div>
+                <label>
+                    <b>IsActive :</b>
+                </label><br>
+                <input type="radio" value="Yes" name="isactive" checked> Yes
+                <input type="radio" value="No" name="isactive"> No
+
+
+            </div>
+
+            <button type="submit" class="addbtn">Add Department</button>
+        </div>
+    </form>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Department
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+
+        .container {
+            padding: 50px;
+            background-color: lightblue;
+        }
+
+        input[type=text], input[type=password], textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+            input[type=text]:focus, input[type=password]:focus {
+                background-color: orange;
+                outline: none;
+            }
+
+        div {
+            padding: 10px 0;
+        }
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        .addbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+            .addbtn:hover {
+                opacity: 1;
+            }
+    </style>
+</head>
+<body>
+    <form asp-controller="Department" asp-action="Edit" method="post">
+        <div class="container">
+            <center>  <h1>Edit Department</h1> </center>
+            <hr>
+            <label><b>Id:</b></label>
+            <input type="text" name="Id" placeholder="Enter new department Id which you want to update" size="10" required />
+            <label><b>Name:</b></label>
+            <input type="text" name="Name" placeholder="Enter new department Name" size="30" required />
+            <div>
+                <label>
+                    <b>IsActive :</b>
+                </label><br>
+                <input type="radio" value="Yes" name="isactive" checked> Yes
+                <input type="radio" value="No" name="isactive"> No
+
+
+            </div>
+
+            <button type="submit" class="addbtn">Edit Department</button>
+        </div>
+    </form>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Department
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Design || Future Web</title>
+    <style>
+
+        .edit-btn
+        {
+            background-color: #4CAF50; 
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius:30px;
+        }
+
+            .edit-btn:hover {
+            opacity: 1;
+        }
+
+        .delete-btn {
+            background-color: #E10000; 
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+            .delete-btn:hover {
+                opacity: 1;
+            }
+
+        .create-btn {
+            background-color: #4CAF50;
+            ;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+        .create-btn:hover {
+                opacity: 1;
+            }
+        .row
+        {
+            padding: 10px 25px;
+        }
+        .col1
+        {
+            font-weight:bold;
+        }
+
+        .container {
+            background-color: lightblue;
+            padding: 50px;
+        }
+
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Details of Departments</h1>
+    <button class="create-btn" onclick="Department/Create">Create New</button>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <b>Name</b>
+            </div>
+            <div class="col">
+                <b>IsActive</b>
+            </div>
+            <div class="col">
+                <b>Action</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwinde
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwinde
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwinde
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Employee
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+
+        .container {
+            padding: 50px;
+            background-color: lightblue;
+        }
+
+        input[type=text], input[type=password], textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+            input[type=text]:focus, input[type=password]:focus {
+                background-color: orange;
+                outline: none;
+            }
+
+        div {
+            padding: 10px 0;
+        }
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        .addbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+            .addbtn:hover {
+                opacity: 1;
+            }
+    </style>
+</head>
+<body>
+    <form asp-controller="Employee" asp-action="Edit" method="post">
+        <div class="container">
+            <center>  <h1>Edit Employee</h1> </center>
+            <hr>
+            <label><b>Id:</b></label>
+            <input type="text" name="Id" placeholder="Enter employee id which you want to update" size="30" required />
+            <label><b>Name:</b></label>
+            <input type="text" name="Name" placeholder="Enter employee's new name" size="30" required />
+            <label for="email"><b>Email:</b></label>
+            <input type="text" placeholder="Enter new email" name="Email" required/>
+            <label>
+                <b>Phone:</b>
+            </label>
+            <input type="text" name="phone" placeholder="Enter new phone no." size="10" required/>
+            <div>
+                <label>
+                    <b>Department:</b>
+                </label>
+
+                <select>
+                    <option value="Development">Development</option>
+                    <option value="Tesing">Tesing</option>
+                    <option value="Sales">Sales</option>
+                    <option value="ITteam">IT team</option>
+
+                </select>
+            </div>
+            <div>
+                <label>
+                    <b>IsActive :</b>
+                </label><br>
+                <input type="radio" value="Yes" name="isactive" checked> Yes
+                <input type="radio" value="No" name="isactive"> No
+
+
+            </div>
+
+            <button type="submit" class="addbtn">Edit Employee</button>
+        </div>
+    </form>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Employee
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Design || Future Web</title>
+    <style>
+
+        .edit-btn
+        {
+            background-color: #4CAF50; 
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius:30px;
+        }
+
+            .edit-btn:hover {
+            opacity: 1;
+        }
+
+        .delete-btn {
+            background-color: #E10000; 
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+            .delete-btn:hover {
+                opacity: 1;
+            }
+
+        .create-btn {
+            background-color: #4CAF50;
+            ;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+        .create-btn:hover {
+                opacity: 1;
+            }
+        .row
+        {
+            padding: 10px 25px;
+        }
+        .col1
+        {
+            font-weight:bold;
+        }
+
+        .container {
+            background-color: lightblue;
+            padding: 50px;
+            
+        }
+
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h1>Details of Employees</h1>
+    <button class="create-btn" href="Department/Create">Create New</button>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <b>Name</b>
+            </div>
+            <div class="col">
+                <b>Email</b>
+            </div>
+            <div class="col">
+                <b>Phone</b>
+            </div>
+            <div class="col">
+                <b>Department</b>
+            </div>
+            <div class="col">
+                <b>IsActive</b>
+            </div>
+            <div class="col">
+                <b>Action</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwindersingh
+            </div>
+            <div class="col">
+                df@244.com
+            </div>
+            <div class="col">
+                43543565
+            </div>
+            <div class="col">
+                Dev
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwindersingh
+            </div>
+            <div class="col">
+                df@244.com
+            </div>
+            <div class="col">
+                43543565
+            </div>
+            <div class="col">
+                Dev
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwindersingh
+            </div>
+            <div class="col">
+                df@244.com
+            </div>
+            <div class="col">
+                43543565
+            </div>
+            <div class="col">
+                Dev
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Skill
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+
+        .container {
+            padding: 50px;
+            background-color: lightblue;
+        }
+
+        input[type=text], input[type=password], textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+            input[type=text]:focus, input[type=password]:focus {
+                background-color: orange;
+                outline: none;
+            }
+
+        div {
+            padding: 10px 0;
+        }
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        .addbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+            .addbtn:hover {
+                opacity: 1;
+            }
+    </style>
+</head>
+<body>
+    <form asp-controller="Skill" asp-action="Create" method="post">
+        <div class="container">
+            <center>  <h1>Add Skill</h1> </center>
+            <hr>
+            <label><b>Name:</b></label>
+            <input type="text" name="Name" placeholder="Enter skill name" size="30" required />
+            <div>
+                <label>
+                    <b>IsActive :</b>
+                </label><br>
+                <input type="radio" value="Yes" name="isactive" checked> Yes
+                <input type="radio" value="No" name="isactive"> No
+
+
+            </div>
+
+            <button type="submit" class="addbtn">Add Skill</button>
+        </div>
+    </form>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Skill
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+
+        .container {
+            padding: 50px;
+            background-color: lightblue;
+        }
+
+        input[type=text], input[type=password], textarea {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0 22px 0;
+            display: inline-block;
+            border: none;
+            background: #f1f1f1;
+        }
+
+            input[type=text]:focus, input[type=password]:focus {
+                background-color: orange;
+                outline: none;
+            }
+
+        div {
+            padding: 10px 0;
+        }
+
+        hr {
+            border: 1px solid #f1f1f1;
+            margin-bottom: 25px;
+        }
+
+        .addbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+            .addbtn:hover {
+                opacity: 1;
+            }
+    </style>
+</head>
+<body>
+    <form asp-controller="Skill" asp-action="Edit" method="post">
+        <div class="container">
+            <center>  <h1>Edit Skill</h1> </center>
+            <hr>
+            <label><b>Id:</b></label>
+            <input type="text" name="Id" placeholder="Enter new skill Id which you want to update" size="10" required />
+            <label><b>Name:</b></label>
+            <input type="text" name="Name" placeholder="Enter new skill Name" size="30" required />
+            <div>
+                <label>
+                    <b>IsActive :</b>
+                </label><br>
+                <input type="radio" value="Yes" name="isactive" checked> Yes
+                <input type="radio" value="No" name="isactive"> No
+
+
+            </div>
+
+            <button type="submit" class="addbtn">Edit Skill</button>
+        </div>
+    </form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model Skill
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Design || Future Web</title>
+    <style>
+
+        .edit-btn {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+            .edit-btn:hover {
+                opacity: 1;
+            }
+
+        .delete-btn {
+            background-color: #E10000;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+            .delete-btn:hover {
+                opacity: 1;
+            }
+
+        .create-btn {
+            background-color: #4CAF50;
+            ;
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 30px;
+        }
+
+            .create-btn:hover {
+                opacity: 1;
+            }
+
+        .row {
+            padding: 10px 25px;
+        }
+
+        .col1 {
+            font-weight: bold;
+        }
+
+        .container {
+            background-color: lightblue;
+            padding: 50px;
+        }
+
+        body {
+            font-family: Calibri, Helvetica, sans-serif;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Details of Skills</h1>
+    <button class="create-btn" onclick="Department/Create">Create New</button>
+
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
+                <b>Name</b>
+            </div>
+            <div class="col">
+                <b>IsActive</b>
+            </div>
+            <div class="col">
+                <b>Action</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwinde
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwinde
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                kulwinde
+            </div>
+            <div class="col">
+                yes
+            </div>
+            <div class="col">
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+</html>
+
+
+
+
+
+</body>
+
+</html>
+
+</html>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>
